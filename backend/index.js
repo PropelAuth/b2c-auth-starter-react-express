@@ -1,10 +1,11 @@
 const express = require('express')
+const {requireUser} = require("./propelauth");
+
 const app = express()
 const port = 3001
 
-app.get('/api/whoami', (req, res) => {
-    // TODO: return something useful
-    res.json({'test': 'test'});
+app.get('/api/whoami', requireUser, (req, res) => {
+    res.json({'user': req.user});
 })
 
 app.listen(port, () => {
